@@ -29,7 +29,9 @@
 					- @pissers.each do |pisser|
 						- @rating = PisserRating.filter(:pisser => pisser, :user => current_user).first.rating.to_i
 						%tr
-							%td #{PisserRating.filter(:pisser => pisser).avg(:rating).to_f}
+							%td 
+								- if PisserRating.filter(:pisser => pisser).all.size > 0
+									#{PisserRating.filter(:pisser => pisser).avg(:rating).to_f}
 							%td #{pisser.name}
 							%td
 								%a{:href => "/venue/#{@venue['id']}/pisser/#{pisser.id}/1"}
