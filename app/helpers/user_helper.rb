@@ -11,4 +11,10 @@ HowsThePisser.helpers do
 		!! current_user
 	end
 
+	def protected!
+        unless is_logged_in?
+        	redirect "/"
+        end
+    end
+
 end

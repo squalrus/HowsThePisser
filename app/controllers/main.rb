@@ -29,7 +29,7 @@ HowsThePisser.controllers do
 		# end hack
 
 		# some user data as an example
-		user = access_token.get('https://api.foursquare.com/v2/users/self')
+		user = access_token.get("https://api.foursquare.com/v2/users/self?#{v_param}")
 		user_response = user['response']['user']
 
 		foursquare_id = user_response['id']

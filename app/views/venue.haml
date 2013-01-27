@@ -1,0 +1,44 @@
+.row-fluid
+	.span1
+	.span10
+		.hero-unit
+			%h2 How's the pisser at <a href="#{@venue['canonicalUrl']}"" target="_blank">#{@venue['name']}</a>?
+
+			%p
+				This is a question we ask ourselves and our friends too often. Well now, <strong>ask the internet</strong> how the pisser is. Do it, I dare you.
+
+			%form.form{:method => "POST", :action => "/venue/#{@venue['id']}/pisser"}
+				%fieldset
+					.control-group
+						.controls
+							%input#inputName{:placeholder => "Pisser name (ie: 11th floor Men's)", :name => "name",}
+
+					.control-group
+						.controls
+							%button.btn.btn-primary{:type => "submit"}
+								%i.icon-comment.icon-white
+								Add pisser
+
+			%table.table.table-striped.table-bordered.table-hover
+				%thead
+					%tr
+						%th Rating
+						%th Pisser Name
+						%th Your Rating
+				%tbody
+					- @pissers.each do |pisser|
+						- @rating = PisserRating.filter(:pisser => pisser, :user => current_user).first.rating.to_i
+						%tr
+							%td #{PisserRating.filter(:pisser => pisser).avg(:rating).to_f}
+							%td #{pisser.name}
+							%td
+								%a{:href => "/venue/#{@venue['id']}/pisser/#{pisser.id}/1"}
+									%span.badge{:class => (@rating == 1 ? "badge-success" : "") } 1
+								%a{:href => "/venue/#{@venue['id']}/pisser/#{pisser.id}/2"}
+									%span.badge{:class => (@rating == 2 ? "badge-success" : "") } 2
+								%a{:href => "/venue/#{@venue['id']}/pisser/#{pisser.id}/3"}
+									%span.badge{:class => (@rating == 3 ? "badge-success" : "") } 3
+								%a{:href => "/venue/#{@venue['id']}/pisser/#{pisser.id}/4"}
+									%span.badge{:class => (@rating == 4 ? "badge-success" : "") } 4
+								%a{:href => "/venue/#{@venue['id']}/pisser/#{pisser.id}/5"}
+									%span.badge{:class => (@rating == 5 ? "badge-success" : "") } 5

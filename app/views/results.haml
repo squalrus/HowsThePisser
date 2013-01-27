@@ -1,0 +1,29 @@
+.row-fluid
+	.span1
+	.span10
+		.hero-unit
+			%h2 How's the pisser at these places?
+
+			%p
+				This is a question we ask ourselves and our friends too often. Well now, <strong>ask the internet</strong> how the pisser is. Do it, I dare you.
+
+			%table.table.table-striped.table-bordered.table-hover
+				%thead
+					%tr
+						%th Rating
+						%th Venue Name
+						%th Location
+						%th
+				%tbody
+					- @venues.each do |venue|
+						%tr
+							%td
+							%td 
+								%a{:href => venue['canonicalUrl'], :target => "_blank"}
+									#{venue['name']}
+							%td #{venue['location']['address']} #{venue['location']['city']}, #{venue['location']['state']}
+							%td
+								%a{:href => "/venue/#{venue['id']}/pisser"}
+									%button.btn.btn-primary
+										%i.icon-question-sign.icon-white
+										How is it?

@@ -17,4 +17,8 @@ HowsThePisser.helpers do
 		uri.to_s
 	end
 
+	def v_param
+		return "v=" + Time.now.strftime('%Y%m%d')
+	end
+
 end
