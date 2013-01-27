@@ -44,7 +44,7 @@ HowsThePisser.controllers do
 			pisser_rating.rating = rating
 			pisser_rating.save
 		else
-			pisser_rating = PisserRating.create(:pisser => Pisser[2], :user => User[5], :rating => 4)
+			pisser_rating = PisserRating.create(:pisser => pisser, :user => current_user, :rating => 4)
 		end
 
 		redirect "/venue/#{params[:id]}/pisser"

@@ -27,7 +27,11 @@
 						%th Your Rating
 				%tbody
 					- @pissers.each do |pisser|
-						- @rating = PisserRating.filter(:pisser => pisser, :user => current_user).first.rating.to_i
+						- @the_pisser = PisserRating.filter(:pisser => pisser, :user => current_user).first
+						- if @the_pisser
+							- @rating = @the_pisser.rating.to_i
+						- else
+							- @rating = 0
 						%tr
 							%td 
 								- if PisserRating.filter(:pisser => pisser).all.size > 0
