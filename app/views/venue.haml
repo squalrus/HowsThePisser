@@ -7,6 +7,25 @@
 			%p
 				This is a question we ask ourselves and our friends too often. Well now, <strong>ask the internet</strong> how the pisser is. Do it, I dare you.
 
+			- if @venue['photos']['groups'][0]['count'].to_i > 0
+
+				#myCarousel.carousel.slide{:style => "background-color: #CCCCCC;"}
+					.carousel-inner
+
+						- @active = false
+
+						- @venue['photos']['groups'][0]['items'].each do |photo|
+							- if photo['width'] > photo['height']
+								%div{:class => (@active ? "item" : "item active") }
+									%img{ :src => "#{photo['prefix']}#{photo['width']}x#{photo['height']}#{photo['suffix']}"}
+								- @active = true
+					
+					%a.carousel-control.left{:href =>"#myCarousel", "data-slide" => "prev"}
+					%a.carousel-control.right{:href => "#myCarousel", "data-slide" => "next"}
+
+					:javascript
+						$('.carousel').carousel({'interval' : 4000})
+
 			%form.form{:method => "POST", :action => "/venue/#{@venue['id']}/pisser"}
 				%fieldset
 					.control-group
