@@ -20,4 +20,6 @@
 						%a{:href => "/goodbye"} Goodbye
 
 				%p
-					So this part is under construction yet. But do not fear! This will be done soon enough. Stay tuned and keep pissing.
+					%form.form{:method => "GET", :action => "/search"}
+						%input{:type => "textfield", :name => "near", :placeholder => "Enter city,state"}
+						%input{:type => "submit", :value => "Search"}
