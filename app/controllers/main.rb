@@ -4,6 +4,11 @@ HowsThePisser.controllers do
 		render :index
 	end
 
+	get "/goodbye" do
+		logout User
+		redirect "/"
+	end
+
 	get "/foursquare" do
 		redirect client.web_server.authorize_url(:redirect_uri => redirect_uri)
 	end
@@ -25,7 +30,21 @@ HowsThePisser.controllers do
 
 		# some user data as an example
 		user = access_token.get('https://api.foursquare.com/v2/users/self')
-		user.inspect
+		user_response = user['response']['user']
+
+		foursquare_id = user_response['id']
+		first_name = user_response['firstName']
+		last_name = user_response['lastName']
+
+		user = User.filter(:foursquare_id => foursquare_id).first
+		password = "joshisawesome"
+		unless user
+			user = User.create(:foursquare_id => foursquare_id, :foursquare_access_token => response["access_token"], :password => password, :first_name => first_name, :last_name => last_name)
+		end
+
+		authenticate(user)
+
+		redirect "/"
 	end
 
 end

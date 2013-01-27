@@ -2,4 +2,22 @@
 	.span1
 	.span10
 		.hero-unit
-			%h2 How's The Pisser
+			- unless current_user
+				%h2 How's the pisser?
+
+				%p
+					This is a question we ask ourselves and our friends too often. Well now, <strong>ask the internet</strong> how the pisser is. Do it, I dare you.
+
+				%p 
+					Connect to Foursquare to find out and tell your friends
+
+				%a{:href => "/foursquare"}
+					%img{:src => "/images/foursquare-connect-blue.png"}
+			- else
+				%h2 
+					#{current_user.first_name} #{current_user.last_name}, how's the pisser today?
+					%small
+						%a{:href => "/goodbye"} Goodbye
+
+				%p
+					So this part is under construction yet. But do not fear! This will be done soon enough. Stay tuned and keep pissing.
