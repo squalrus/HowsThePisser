@@ -1,0 +1,37 @@
+.profile {
+    margin: 1.0em 0.5em;
+
+    img { display: inline-block; }
+
+    .pisserator {
+        background-color: #369;
+        border: 4px solid darken(#369, 10%);
+        color: #F4F4F4;
+        display: inline-block;
+        height: 96px;
+        margin: 0.5em 0 0.5em 1.5em;
+        padding: 0.3em 0.8em;
+        position: relative;
+        text-align: center;
+        vertical-align: top;
+        .rounded-corners(8px);
+
+        .count {
+            display: block;
+            font-family: @font-custom;
+            font-size: 6.3em;
+            line-height: 0.95em;
+            text-align: center;
+        }
+    }
+    .pisserator:after {
+        border-bottom: 10px solid transparent;
+        border-right: 10px solid darken(#369, 10%);
+        border-top: 10px solid transparent;
+        content: '';
+        left: -10px;
+        margin-top: -10px;
+        position: absolute;
+        top: 50%;
+    }
+}
